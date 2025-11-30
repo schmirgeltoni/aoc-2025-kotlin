@@ -16,6 +16,12 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
     .padStart(32, '0')
 
 /**
- * The cleaner shorthand for printing output.
+ * Logs any value to the console and returns the same value.
+ * Therefore, it can be put into any chain of operation to see the value of the current stage
+ * while not disrupting the operation.
+ * @param prefix a prefix [String] to be logged before the value.
+ * @param postfix a postfix [String] to be logged after the value.
  */
-fun Any?.println() = println(this)
+fun <T> T?.log(prefix: String = "", postfix: String = ""): T? = this.also {
+    println(prefix + it + postfix)
+}
