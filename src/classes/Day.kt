@@ -1,9 +1,11 @@
 package classes
 
+import log
 import readInput
+import kotlin.time.TimedValue
+import kotlin.time.measureTimedValue
 
-abstract class Day {
-
+abstract class Day<T> {
     val name: String
         get() = this::class.simpleName.toString()
 
@@ -11,39 +13,41 @@ abstract class Day {
         get() = name.takeLast(2)
 
     abstract val testData: List<String>
-    abstract val part1ExampleSolution: Any
-    abstract val part2ExampleSolution: Any
+    abstract val part1ExampleSolution: T
+    abstract val part2ExampleSolution: T
 
-    abstract fun algorithmPart1(input: List<String>): Any
-    abstract fun algorithmPart2(input: List<String>): Any
+    abstract fun algorithmPart1(input: List<String>): T
+    abstract fun algorithmPart2(input: List<String>): T
 
     fun part1Example() {
-        check(algorithmPart1(testData) == part1ExampleSolution)
+        check(algorithmPart1(testData).log("Result of the part one test was: ") == part1ExampleSolution)
     }
 
-    /**
-     * Run part one of this day
-     */
-    fun part1(): Any = algorithmPart2(readInput("Day${day}"))
+    protected open val data = readInput("Day$day")
+
+    fun part1(): TimedValue<T> = measureTimedValue {
+        algorithmPart1(data)
+    }
 
     fun part2Example() {
-        check(algorithmPart2(testData) == part2ExampleSolution)
+        check(algorithmPart2(testData).log("Result of the part two test was: ") == part2ExampleSolution)
     }
 
-    /**
-     * Run part two of this day
-     */
-    fun part2(): Any = algorithmPart2(readInput("Day${day}"))
+    fun part2(): TimedValue<T> = measureTimedValue {
+        algorithmPart2(data)
+    }
 
 
     fun runEverything() {
+        println(name)
         part1Example()
         part2Example()
+        val result1 = part1()
+        val result2 = part2()
         println(
             """
-            $name
-            The result of part one is: ${part1()}
-            The result of part two is: ${part2()}
+            The result of part one is: ${result1.value}. Elapsed time: ${result1.duration}
+            The result of part two is: ${result2.value}. Elapsed time: ${result2.duration}
         """.trimIndent()
         )
     }

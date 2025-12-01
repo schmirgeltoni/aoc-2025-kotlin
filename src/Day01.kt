@@ -1,6 +1,6 @@
 import classes.Day
 
-object Day01 : Day() {
+object Day01 : Day<Int>() {
     override val testData: List<String>
         get() = """
             L68
@@ -17,7 +17,7 @@ object Day01 : Day() {
     override val part1ExampleSolution = 3
     override val part2ExampleSolution = 6
 
-    override fun algorithmPart1(input: List<String>): Any {
+    override fun algorithmPart1(input: List<String>): Int {
         var dial = 50
 
         return input.count {
