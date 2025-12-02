@@ -1,5 +1,6 @@
 package classes
 
+import averageRuntime
 import log
 import readInput
 import kotlin.time.TimedValue
@@ -51,4 +52,12 @@ abstract class Day<T> {
         """.trimIndent()
         )
     }
+
+    fun benchmarkPart1() = averageRuntime {
+        part1()
+    }.log("Average runtime of part 1 was ")
+
+    fun benchmarkPart2() = averageRuntime {
+        part2()
+    }.log("Average runtime of part 2 was ")
 }
