@@ -21,7 +21,7 @@ abstract class Day<T> {
     abstract fun algorithmPart2(input: List<String>): T
 
     fun part1Example() {
-        check(algorithmPart1(testData).log("Result of the part one test was: ") == part1ExampleSolution)
+        check(algorithmPart1(testData).log("Result of the part one test was: ", overrideGlobalLogger = true) == part1ExampleSolution)
     }
 
     protected open val data = readInput("Day$day")
@@ -31,7 +31,7 @@ abstract class Day<T> {
     }
 
     fun part2Example() {
-        check(algorithmPart2(testData).log("Result of the part two test was: ") == part2ExampleSolution)
+        check(algorithmPart2(testData).log("Result of the part two test was: ", overrideGlobalLogger = true) == part2ExampleSolution)
     }
 
     fun part2(): TimedValue<T> = measureTimedValue {
@@ -55,9 +55,9 @@ abstract class Day<T> {
 
     fun benchmarkPart1() = averageRuntime {
         part1()
-    }.log("Average runtime of part 1 was ")
+    }.log("Average runtime of part 1 was ", overrideGlobalLogger = true)
 
     fun benchmarkPart2() = averageRuntime {
         part2()
-    }.log("Average runtime of part 2 was ")
+    }.log("Average runtime of part 2 was ", overrideGlobalLogger = true)
 }
