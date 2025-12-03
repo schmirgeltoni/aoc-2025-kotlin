@@ -1,5 +1,13 @@
 import classes.Day
 
+/**
+ * With 100 runs:
+ *
+ * Average runtime of part 1 was around `300 milliseconds`
+ *
+ * Average runtime of part 2 was around `300 milliseconds`
+ */
+
 object Day02 : Day<Long>() {
     override val testData: List<String> = """
         11-22,95-115,998-1012,1188511880-1188511890,222220-222224,
