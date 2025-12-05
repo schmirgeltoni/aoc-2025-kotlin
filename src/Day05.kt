@@ -8,7 +8,7 @@ import classes.Day
  * Average runtime of part 2 was around `130 microseconds`
  */
 
-object Day05 : Day<Number>() {
+object Day05 : Day() {
     override val testData: List<String> = """
         3-5
         10-14
@@ -88,6 +88,4 @@ object Day05 : Day<Number>() {
 
 fun main() {
     Day05.runEverything()
-    Day05.benchmarkPart1()
-    Day05.benchmarkPart2()
 }

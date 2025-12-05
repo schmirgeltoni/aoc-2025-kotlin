@@ -8,7 +8,7 @@ import classes.Day
  * Average runtime of part 2 was around `10 milliseconds`
  */
 
-object Day04 : Day<Int>() {
+object Day04 : Day() {
 
     enum class Tile {
         Paper,

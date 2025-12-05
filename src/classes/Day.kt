@@ -1,40 +1,55 @@
 package classes
 
+import Day01
+import Day02
+import Day03
+import Day04
+import Day05
 import averageRuntime
 import log
 import readInput
 import kotlin.time.TimedValue
 import kotlin.time.measureTimedValue
 
-abstract class Day<T> {
+abstract class Day {
     val name: String
         get() = this::class.simpleName.toString()
 
     val day: String
         get() = name.takeLast(2)
 
-    abstract val testData: List<String>
-    abstract val part1ExampleSolution: T
-    abstract val part2ExampleSolution: T
+    protected abstract val testData: List<String>
+    protected abstract val part1ExampleSolution: Number
+    protected abstract val part2ExampleSolution: Number
 
-    abstract fun algorithmPart1(input: List<String>): T
-    abstract fun algorithmPart2(input: List<String>): T
+    abstract fun algorithmPart1(input: List<String>): Number
+    abstract fun algorithmPart2(input: List<String>): Number
 
     fun part1Example() {
-        check(algorithmPart1(testData).log("Result of the part one test was: ", overrideGlobalLogger = true) == part1ExampleSolution)
+        check(
+            algorithmPart1(testData).log(
+                "Result of the part one test was: ",
+                overrideGlobalLogger = true
+            ) == part1ExampleSolution
+        )
     }
 
     protected open val data = readInput("Day$day")
 
-    fun part1(): TimedValue<T> = measureTimedValue {
+    fun part1(): TimedValue<Number> = measureTimedValue {
         algorithmPart1(data)
     }
 
     fun part2Example() {
-        check(algorithmPart2(testData).log("Result of the part two test was: ", overrideGlobalLogger = true) == part2ExampleSolution)
+        check(
+            algorithmPart2(testData).log(
+                "Result of the part two test was: ",
+                overrideGlobalLogger = true
+            ) == part2ExampleSolution
+        )
     }
 
-    fun part2(): TimedValue<T> = measureTimedValue {
+    fun part2(): TimedValue<Number> = measureTimedValue {
         algorithmPart2(data)
     }
 
@@ -60,4 +75,22 @@ abstract class Day<T> {
     fun benchmarkPart2() = averageRuntime {
         part2()
     }.log("Average runtime of part 2 was ", overrideGlobalLogger = true)
+
+    companion object {
+
+        internal val allDays = listOf(
+            Day01,
+            Day02,
+            Day03,
+            Day04,
+            Day05,
+        )
+    }
+}
+
+fun main() {
+    Day.allDays.forEach {
+        it.runEverything()
+        println()
+    }
 }

@@ -8,7 +8,7 @@ import classes.Day
  * Average runtime of part 2 was around `650 microseconds`
  */
 
-object Day01 : Day<Int>() {
+object Day01 : Day() {
     override val testData: List<String>
         get() = """
             L68
