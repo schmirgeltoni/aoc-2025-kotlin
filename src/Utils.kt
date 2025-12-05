@@ -29,9 +29,16 @@ object Logger {
  * @param postfix a postfix [String] to be logged after the value.
  * @param overrideGlobalLogger makes this always log even if global logging is deactivated
  */
-fun <T> T.log(prefix: String = "", postfix: String = "", overrideGlobalLogger: Boolean = false): T = this.also {
+fun <T> T.log(
+    prefix: String = "",
+    postfix: String = "",
+    overrideGlobalLogger: Boolean = false,
+    replacement: (T) -> Any = {
+        it.toString()
+    }
+): T = this.also {
     if (Logger.shouldLog || overrideGlobalLogger)
-        println(prefix + it + postfix)
+        println(prefix + replacement(this) + postfix)
 }
 
 /**
@@ -163,4 +170,10 @@ fun <T> List<List<T>>.countNeighbours(p: Point, element: T): Int {
     }
 
     return count
+}
+
+fun String.splitInTwo(delimiter: String): Pair<String, String> {
+    return split(delimiter, limit = 2).let {
+        it.first() to it.last()
+    }
 }
