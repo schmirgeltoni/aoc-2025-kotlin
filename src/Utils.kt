@@ -177,3 +177,13 @@ fun String.splitInTwo(delimiter: String): Pair<String, String> {
         it.first() to it.last()
     }
 }
+
+fun main() {
+    Day01.benchmarkPart1()
+    Day01.benchmarkPart2()
+    "".log()
+    IndexedValue(0, 0).log()
+    Day03.oldPart1Algorithm(listOf())
+    "".md5()
+    listOf<List<Any>>().logMatrix()
+}
